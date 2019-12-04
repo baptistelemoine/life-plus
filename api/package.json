@@ -1,0 +1,61 @@
+{
+  "name": "lifeplus-api",
+  "version": "0.1.0",
+  "description": "Lifeplus challenge API",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --config .eslintrc ./test ./realtime ./app",
+    "test": "PORT=9000 NODE_ENV=test nyc --reporter=html --reporter=text-summary --check-coverage --lines 75 --statements 75 mocha --check-leaks --reporter spec test/**/*-test.js",
+    "start": "node index.js"
+  },
+  "author": "Baptiste Lemoine",
+  "dependencies": {
+    "@sigfox/koa-boom": "^1.0.1",
+    "@sigfox/koa-error-handler": "^1.0.1",
+    "@sigfox/koa-joi-validate": "^1.0.1",
+    "bcrypt": "^1.0.2",
+    "boom": "^4.2.0",
+    "chance": "^1.0.6",
+    "figc": "0.0.3",
+    "joi": "10.6.x",
+    "joi-objectid": "^2.0.0",
+    "joi-to-json-schema": "^3.0.0",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-compose": "git://github.com/sigfox/compose#expose-middleware",
+    "koa-logger": "^2.0.0",
+    "koa-mount": "^2.0.0",
+    "koa-qs": "git://github.com/sigfox/qs#update-deps",
+    "koa-router": "^7.0.1",
+    "koa-static": "^3.0.0",
+    "kue": "^0.11.5",
+    "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.2.tgz",
+    "mjml": "^3.3.0",
+    "moment": "https://registry.npmjs.org/moment/-/moment-2.18.1.tgz",
+    "mongoose": "^4.6.8",
+    "mongoose-hidden": "^1.2.0",
+    "mongoose-schema-jsonschema": "^1.1.13",
+    "request": "https://registry.npmjs.org/request/-/request-2.81.0.tgz",
+    "request-promise-native": "^1.0.3",
+    "superconsole": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "chai": "^3.5.0",
+    "chai-subset": "^1.5.0",
+    "dirty-chai": "^1.2.2",
+    "eslint": "^4.19.1",
+    "eslint-config-sigfox": "^0.2.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-restricted-globals": "^0.1.1",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.18.4",
+    "nyc": "^11.4.1"
+  },
+  "nyc": {
+    "exclude": [
+      "app/migrations",
+      "test"
+    ]
+  }
+}

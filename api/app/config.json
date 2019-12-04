@@ -1,0 +1,8 @@
+{
+  "port": "9000",
+  "logLevel": "debug",
+  "mongodb": {
+    "url": "mongodb://localhost/lpio",
+    "options": {}
+  }
+}

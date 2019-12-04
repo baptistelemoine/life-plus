@@ -1,0 +1,6 @@
+node_modules
+npm_debug.log
+prod.pub
+prod.pem
+/coverage
+.nyc_output
