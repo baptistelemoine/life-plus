@@ -32,7 +32,7 @@
     "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.2.tgz",
     "mjml": "^3.3.0",
     "moment": "https://registry.npmjs.org/moment/-/moment-2.18.1.tgz",
-    "mongoose": "^4.6.8",
+    "mongoose": "^5.7.5",
     "mongoose-hidden": "^1.2.0",
     "mongoose-schema-jsonschema": "^1.1.13",
     "request": "https://registry.npmjs.org/request/-/request-2.81.0.tgz",
