@@ -5,10 +5,12 @@
 const joi = require('joi');
 const compose = require('koa-compose');
 const joiValidate = require('@sigfox/koa-joi-validate');
+const constants = require('./constants');
+
 joi.objectId = require('joi-objectid')(joi);
 
 /**
- * Get one product validation
+ * Get one code validation
  * Make sure url params is a mongodb objectId
  */
 exports.getOne = compose([
@@ -20,26 +22,26 @@ exports.getOne = compose([
 ]);
 
 /**
- * Update product validation
- * Make sure url params is a mongodb objectId
- */
-exports.update = compose([
-  joiValidate({
-    params: joi.object().keys({
-      id: joi.objectId().required()
-    })
-  })
-]);
-
-/**
- * Create product validation
+ * Create code validation
  */
 exports.create = compose([
   joiValidate({
     body: joi.object().keys({
       name: joi.string().required(),
-      description: joi.string().required(),
-      price: joi.number().required()
+      code: joi
+        .string()
+        .uppercase()
+        .min(6)
+        .max(8)
+        .required(),
+      type: joi
+        .string()
+        .valid(constants.CODE_TYPES)
+        .required(),
+      value: joi
+        .number()
+        .integer()
+        .required()
     })
   })
 ]);

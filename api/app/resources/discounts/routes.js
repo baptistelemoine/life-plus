@@ -4,7 +4,7 @@
 const Router = require('koa-router');
 
 /**
- * Mount products routes
+ * Mount discounts routes
  */
 module.exports = app => {
   const router = new Router({ prefix: '/discounts' });
