@@ -4,6 +4,7 @@
 
 const mongoose = require('mongoose');
 const mongooseHidden = require('mongoose-hidden')({ defaultHidden: { __v: true } });
+const constants = require('./constants');
 
 const { Schema } = mongoose;
 require('mongoose-schema-jsonschema')(mongoose);
@@ -11,20 +12,20 @@ require('mongoose-schema-jsonschema')(mongoose);
 /**
  * Define User Mongodb Schema
  */
-const productSchema = new Schema(
+const discountSchema = new Schema(
   {
     name: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: Number, required: true },
-    discount: { type: Schema.Types.ObjectId, ref: 'Discount' },
+    type: { type: String, enum: constants.DISCOUNT_TYPES, required: true },
+    percent: { type: Number },
+    buy_pay: { type: Array },
     updatedAt: { type: Date, default: () => new Date() }
   },
   {
     timestamps: true
   }
 );
-productSchema.plugin(mongooseHidden);
+discountSchema.plugin(mongooseHidden);
 /**
  * Create model from Schema and db
  */
-module.exports = exports = db => db.model('Product', productSchema);
+module.exports = exports = db => db.model('Discount', discountSchema);

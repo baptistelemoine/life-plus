@@ -22,6 +22,12 @@ module.exports = app => {
       controller: app.context.controllers.products.getOne
     },
     {
+      method: 'PUT',
+      path: '/:id',
+      // validation: app.context.validations.products.getOne,
+      controller: app.context.controllers.products.update
+    },
+    {
       method: 'POST',
       path: '/',
       validation: app.context.validations.products.create,

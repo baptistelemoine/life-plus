@@ -2,6 +2,7 @@
  * Load Resources
  */
 const products = require('./products');
+const discounts = require('./discounts');
 
 /**
  * Set resources into app
@@ -16,4 +17,5 @@ module.exports = app => {
   app.context.validations = {};
   // Set products resource
   products(app);
+  discounts(app);
 };

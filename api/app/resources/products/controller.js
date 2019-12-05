@@ -34,3 +34,17 @@ exports.create = async ctx => {
   ctx.set('Location', `/api/products/${product._id}`);
   ctx.body = product;
 };
+
+/**
+ * Update product
+ */
+exports.update = async ctx => {
+  const { Product } = ctx.models;
+  const { body } = ctx.request;
+  const product = await Product.findById(ctx.params.id);
+  const updatedProduct = Object.assign(product, body);
+  await updatedProduct.populate('discount').execPopulate();
+  await updatedProduct.save();
+  ctx.set('Location', `/api/products/${product._id}`);
+  ctx.body = updatedProduct;
+};
