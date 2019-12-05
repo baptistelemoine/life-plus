@@ -49,8 +49,7 @@ productsSchema.virtual('total').get(function() {
 const cartSchema = new Schema(
   {
     products: [productsSchema],
-    discount_code: { type: Schema.Types.ObjectId, ref: 'Code' },
-    updatedAt: { type: Date, default: () => new Date() }
+    discount_code: { type: Schema.Types.ObjectId, ref: 'Code' }
   },
   {
     timestamps: true,

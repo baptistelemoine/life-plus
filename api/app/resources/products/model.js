@@ -16,8 +16,7 @@ const productSchema = new Schema(
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    discount: { type: Schema.Types.ObjectId, ref: 'Discount' },
-    updatedAt: { type: Date, default: () => new Date() }
+    discount: { type: Schema.Types.ObjectId, ref: 'Discount' }
   },
   {
     timestamps: true

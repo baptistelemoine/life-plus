@@ -17,8 +17,7 @@ const discountSchema = new Schema(
     name: { type: String, required: true },
     type: { type: String, enum: constants.DISCOUNT_TYPES, required: true },
     percent: { type: Number },
-    buy_pay: { type: Array },
-    updatedAt: { type: Date, default: () => new Date() }
+    buy_pay: { type: Array }
   },
   {
     timestamps: true

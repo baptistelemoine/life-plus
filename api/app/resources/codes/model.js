@@ -17,8 +17,7 @@ const codeSchema = new Schema(
     name: { type: String, required: true },
     code: { type: String, required: true },
     type: { type: String, enum: constants.CODE_TYPES, required: true },
-    value: { type: Number, required: true },
-    updatedAt: { type: Date, default: () => new Date() }
+    value: { type: Number, required: true }
   },
   {
     timestamps: true
