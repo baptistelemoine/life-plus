@@ -31,6 +31,6 @@ exports.create = async ctx => {
   const code = new Code(body);
   await code.save();
   ctx.status = 201;
-  ctx.set('Location', `/api/products/${code._id}`);
+  ctx.set('Location', `/api/codes/${code._id}`);
   ctx.body = code;
 };

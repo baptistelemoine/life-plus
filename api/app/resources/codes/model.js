@@ -10,7 +10,7 @@ const { Schema } = mongoose;
 require('mongoose-schema-jsonschema')(mongoose);
 
 /**
- * Define User Mongodb Schema
+ * Define Code Mongodb Schema
  */
 const codeSchema = new Schema(
   {
