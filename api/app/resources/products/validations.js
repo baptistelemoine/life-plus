@@ -39,7 +39,8 @@ exports.create = compose([
     body: joi.object().keys({
       name: joi.string().required(),
       description: joi.string().required(),
-      price: joi.number().required()
+      price: joi.number().required(),
+      discount: joi.objectId()
     })
   })
 ]);
