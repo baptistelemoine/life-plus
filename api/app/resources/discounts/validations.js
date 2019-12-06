@@ -21,6 +21,18 @@ exports.getOne = compose([
 ]);
 
 /**
+ * Delete one discount validation
+ * Make sure url params is a mongodb objectId
+ */
+exports.delete = compose([
+  joiValidate({
+    params: joi.object().keys({
+      id: joi.objectId().required()
+    })
+  })
+]);
+
+/**
  * Create discount validation
  */
 exports.create = compose([

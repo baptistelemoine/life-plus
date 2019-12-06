@@ -23,6 +23,17 @@ exports.getOne = async ctx => {
 };
 
 /**
+ * Delete one codes
+ */
+exports.delete = async ctx => {
+  const { Code } = ctx.models;
+  const code = await Code.findById(ctx.params.id);
+  if (!code) return ctx.boom(boom.notFound());
+  await code.remove();
+  ctx.body = 'ok';
+};
+
+/**
  * Create code
  */
 exports.create = async ctx => {

@@ -22,6 +22,12 @@ module.exports = app => {
       controller: app.context.controllers.discounts.getOne
     },
     {
+      method: 'DELETE',
+      path: '/:id',
+      validation: app.context.validations.discounts.delete,
+      controller: app.context.controllers.discounts.delete
+    },
+    {
       method: 'POST',
       path: '/',
       validation: app.context.validations.discounts.create,

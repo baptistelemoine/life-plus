@@ -23,6 +23,17 @@ exports.getOne = async ctx => {
 };
 
 /**
+ * Get one discount
+ */
+exports.delete = async ctx => {
+  const { Discount } = ctx.models;
+  const discount = await Discount.findById(ctx.params.id);
+  if (!discount) return ctx.boom(boom.notFound());
+  await discount.remove();
+  ctx.body = 'ok';
+};
+
+/**
  * Create discount
  */
 exports.create = async ctx => {
