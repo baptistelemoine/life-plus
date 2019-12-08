@@ -8,7 +8,15 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
 const ModalForm = props => {
-  const { renderIcon, open, renderForm, title, text, isSubmitting } = props;
+  const {
+    renderIcon,
+    open,
+    renderForm,
+    title,
+    text,
+    isSubmitting,
+    onClose
+  } = props;
   const [isOpen, setIsOpen] = useState(open || false);
 
   let submitMyForm = null;
@@ -21,6 +29,7 @@ const ModalForm = props => {
   };
   const handleClose = e => {
     setIsOpen(false);
+    if (onClose) onClose();
   };
   const handleSubmit = e => {
     if (submitMyForm) {
@@ -30,7 +39,11 @@ const ModalForm = props => {
 
   useEffect(() => {
     if (!isSubmitting && submitMyForm) setIsOpen(false);
-  }, [isSubmitting]);
+  }, [isSubmitting, submitMyForm]);
+
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
 
   return (
     <Fragment>
@@ -57,14 +70,16 @@ const ModalForm = props => {
           </Button>
         </DialogActions>
       </Dialog>
-      <IconButton
-        onClick={handleClick}
-        color="primary"
-        aria-label="upload picture"
-        component="span"
-      >
-        {renderIcon}
-      </IconButton>
+      {renderIcon && (
+        <IconButton
+          onClick={handleClick}
+          color="primary"
+          aria-label="upload picture"
+          component="span"
+        >
+          {renderIcon}
+        </IconButton>
+      )}
     </Fragment>
   );
 };

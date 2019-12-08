@@ -1,13 +1,18 @@
 import React, { Fragment } from "react";
 import MUIDataTable from "mui-datatables";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TableHeader from "../../common/TableHeader";
 import useSWR from "swr";
 import AddButtonToolbar from "./components/AddButtonToolbar";
+import RowActionsButton from "./components/RowActionsButton";
 import { PRODUCTS_API } from "../../common/constants";
 
 const columns = [
+  {
+    name: "_id",
+    options: {
+      display: false
+    }
+  },
   { label: "Name", name: "name" },
   { label: "Description", name: "description" },
   { label: "Price", name: "price" },
@@ -16,11 +21,8 @@ const columns = [
     name: "",
     options: {
       customBodyRender: (value, tableMeta, updateValue) => {
-        return (
-          <IconButton aria-label="more" component="span">
-            <MoreVertIcon />
-          </IconButton>
-        );
+        const [id] = tableMeta.rowData;
+        return <RowActionsButton id={id} />;
       }
     }
   }
@@ -37,7 +39,7 @@ const options = {
 };
 
 const Products = props => {
-  const { data, error } = useSWR(PRODUCTS_API);
+  const { data } = useSWR(PRODUCTS_API);
   return (
     <Fragment>
       <TableHeader
