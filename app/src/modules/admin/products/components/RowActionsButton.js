@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ModalForm from "../../../common/ModalForm";
 import AddProductForm from "../forms/AddProductForm";
@@ -60,7 +61,9 @@ const RowActionsButton = props => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleEdit}>Edit</MenuItem>
-        <MenuItem onClick={handleDelete}>Delete</MenuItem>
+        <MenuItem onClick={handleDelete}>
+          <Typography color="error">Delete</Typography>
+        </MenuItem>
       </Menu>
       <ModalForm
         title="Update product"

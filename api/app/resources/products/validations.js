@@ -44,3 +44,17 @@ exports.create = compose([
     })
   })
 ]);
+
+/**
+ * Update product validation
+ */
+exports.create = compose([
+  joiValidate({
+    body: joi.object().keys({
+      name: joi.string(),
+      description: joi.string(),
+      price: joi.number(),
+      discount: joi.objectId()
+    })
+  })
+]);

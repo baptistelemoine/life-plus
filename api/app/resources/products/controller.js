@@ -50,3 +50,14 @@ exports.update = async ctx => {
   ctx.set('Location', `/api/products/${product._id}`);
   ctx.body = updatedProduct;
 };
+
+/**
+ * Delete product
+ */
+exports.delete = async ctx => {
+  const { Product } = ctx.models;
+  const product = await Product.findById(ctx.params.id);
+  if (!product) return ctx.boom(boom.notFound());
+  await product.remove();
+  ctx.body = 'ok';
+};

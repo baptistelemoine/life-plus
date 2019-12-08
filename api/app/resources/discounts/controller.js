@@ -23,7 +23,7 @@ exports.getOne = async ctx => {
 };
 
 /**
- * Get one discount
+ * Delete discount
  */
 exports.delete = async ctx => {
   const { Discount } = ctx.models;

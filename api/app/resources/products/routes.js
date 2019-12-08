@@ -24,8 +24,14 @@ module.exports = app => {
     {
       method: 'PUT',
       path: '/:id',
-      // validation: app.context.validations.products.getOne,
+      validation: app.context.validations.products.update,
       controller: app.context.controllers.products.update
+    },
+    {
+      method: 'DELETE',
+      path: '/:id',
+      validation: app.context.validations.products.delete,
+      controller: app.context.controllers.products.delete
     },
     {
       method: 'POST',
