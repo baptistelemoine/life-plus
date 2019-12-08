@@ -6,6 +6,7 @@ const path = require('path');
 const Koa = require('koa');
 const superconsole = require('superconsole');
 const figc = require('figc');
+const cors = require('@koa/cors');
 
 /**
  * Application dependencies
@@ -45,6 +46,9 @@ if (config.env !== 'test') {
  */
 
 const app = new Koa();
+
+// Enable cors
+app.use(cors());
 
 // Print Koa app errors
 app.on('error', err => console.error(err));

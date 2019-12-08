@@ -10,6 +10,7 @@
   },
   "author": "Baptiste Lemoine",
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "@sigfox/koa-boom": "^1.0.1",
     "@sigfox/koa-error-handler": "^1.0.1",
     "@sigfox/koa-joi-validate": "^1.0.1",

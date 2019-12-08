@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -8,7 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
 const ModalForm = props => {
-  const { children, renderIcon, open, renderForm } = props;
+  const { renderIcon, open, renderForm, title, text, isSubmitting } = props;
   const [isOpen, setIsOpen] = useState(open || false);
 
   let submitMyForm = null;
@@ -28,6 +28,10 @@ const ModalForm = props => {
     }
   };
 
+  useEffect(() => {
+    if (!isSubmitting && submitMyForm) setIsOpen(false);
+  }, [isSubmitting]);
+
   return (
     <Fragment>
       <Dialog
@@ -35,19 +39,20 @@ const ModalForm = props => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
+          <DialogContentText>{text}</DialogContentText>
           {renderForm(bindSubmitForm)}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            color="primary"
+          >
             Submit
           </Button>
         </DialogActions>

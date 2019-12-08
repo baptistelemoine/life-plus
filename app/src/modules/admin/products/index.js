@@ -2,17 +2,18 @@ import React, { Fragment } from "react";
 import MUIDataTable from "mui-datatables";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import AddIcon from "@material-ui/icons/Add";
 import TableHeader from "../../common/TableHeader";
-import ModalForm from "../../common/ModalForm";
-import AddProductForm from "./forms/AddProductForm";
+import useSWR from "swr";
+import AddButtonToolbar from "./components/AddButtonToolbar";
+import { PRODUCTS_API } from "../../common/constants";
 
 const columns = [
-  "Name",
-  "Description",
-  "Price",
-  "Discount",
+  { label: "Name", name: "name" },
+  { label: "Description", name: "description" },
+  { label: "Price", name: "price" },
+  { label: "Discount", name: "discount.name" },
   {
+    name: "",
     options: {
       customBodyRender: (value, tableMeta, updateValue) => {
         return (
@@ -25,21 +26,6 @@ const columns = [
   }
 ];
 
-const data = [
-  [
-    "My first product",
-    "This is a description for my first product",
-    23.4,
-    "Buy 3 pay 2"
-  ],
-  [
-    "Super product with discount",
-    "Another description for second first product",
-    12.8,
-    "10% discount"
-  ]
-];
-
 const options = {
   selectableRows: "none",
   pagination: false,
@@ -47,35 +33,18 @@ const options = {
   download: false,
   viewColumns: false,
   filter: false,
-  customToolbar: () => {
-    const handleSubmit = e => {
-      console.info(e);
-    };
-    return (
-      <ModalForm
-        renderIcon={<AddIcon />}
-        renderForm={bindSubmitForm => {
-          return (
-            <AddProductForm
-              initialValues={{ email: "" }}
-              bindSubmitForm={bindSubmitForm}
-              onSubmit={handleSubmit}
-            />
-          );
-        }}
-      />
-    );
-  }
+  customToolbar: () => <AddButtonToolbar />
 };
 
 const Products = props => {
+  const { data, error } = useSWR(PRODUCTS_API);
   return (
     <Fragment>
       <TableHeader
         title="Products"
         text="Add, edit, delete and add discounts for your products"
       />
-      <MUIDataTable data={data} columns={columns} options={options} />
+      {data && <MUIDataTable data={data} columns={columns} options={options} />}
     </Fragment>
   );
 };
