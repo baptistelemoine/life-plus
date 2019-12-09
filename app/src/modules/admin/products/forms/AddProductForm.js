@@ -12,7 +12,7 @@ const AddProductForm = props => {
     <Formik
       initialValues={initialValues}
       onSubmit={values => {
-        onSubmit({ values, ...{ discount: values.discount || null } });
+        onSubmit({ ...values, ...{ discount: values.discount || null } });
       }}
     >
       {({ submitForm }) => {

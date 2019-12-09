@@ -46,7 +46,11 @@ const RowActionsButton = props => {
     setIsModalOpened(true);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    await axios.delete(`${PRODUCTS_API}/${id}`);
+    setAnchorEl(null);
+    trigger(PRODUCTS_API);
+  };
 
   return (
     <Fragment>

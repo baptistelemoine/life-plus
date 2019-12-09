@@ -20,6 +20,7 @@
     "mui-datatables": "^2.13.2",
     "react": "latest",
     "react-dom": "latest",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "latest",
     "swr": "^0.1.13"
   },
