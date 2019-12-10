@@ -2,6 +2,7 @@ import React from "react";
 import MainLayout from "./modules/main";
 import AdminPage from "./modules/admin";
 import Products from "./modules/admin/products";
+import Carts from "./modules/admin/carts";
 import Shop from "./modules/shop";
 import { SWRConfig } from "swr";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -21,7 +22,8 @@ export default function App() {
             </Route>
             <Route exact path="/admin">
               <AdminPage>
-                <Products />
+                <Carts />
+                {/*<Products />*/}
               </AdminPage>
             </Route>
           </Switch>

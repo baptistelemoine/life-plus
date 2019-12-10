@@ -40,7 +40,7 @@ exports.create = compose([
       name: joi.string().required(),
       description: joi.string().required(),
       price: joi.number().required(),
-      discount: joi.objectId()
+      discount: joi.objectId().allow(null)
     })
   })
 ]);
@@ -48,13 +48,13 @@ exports.create = compose([
 /**
  * Update product validation
  */
-exports.create = compose([
+exports.update = compose([
   joiValidate({
     body: joi.object().keys({
       name: joi.string(),
       description: joi.string(),
       price: joi.number(),
-      discount: joi.objectId()
+      discount: joi.objectId().allow(null)
     })
   })
 ]);
