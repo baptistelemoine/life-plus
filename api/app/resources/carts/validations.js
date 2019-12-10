@@ -32,7 +32,24 @@ exports.create = compose([
           quantity: joi.number().integer()
         })
       ),
-      discount_code: joi.objectId()
+      discount_code: joi.string().allow(null)
+    })
+  })
+]);
+
+/**
+ * Update cart validation
+ */
+exports.update = compose([
+  joiValidate({
+    body: joi.object().keys({
+      products: joi.array().items(
+        joi.object().keys({
+          product: joi.objectId(),
+          quantity: joi.number().integer()
+        })
+      ),
+      discount_code: joi.string().allow(null)
     })
   })
 ]);

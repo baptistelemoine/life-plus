@@ -30,7 +30,7 @@ module.exports = app => {
     {
       method: 'PUT',
       path: '/:id',
-      // validation: app.context.validations.carts.update,
+      validation: app.context.validations.carts.update,
       controller: app.context.controllers.carts.update
     }
   ];

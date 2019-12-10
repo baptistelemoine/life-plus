@@ -43,7 +43,7 @@ const renderDiscountAmount = cart => {
 
 const CartItem = props => {
   const classes = useStyles();
-  const { cart } = props;
+  const { cart, isSingleCart, renderAddDiscountCell } = props;
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="spanning table">
@@ -82,11 +82,11 @@ const CartItem = props => {
           </TableRow>
           <TableRow>
             <TableCell>
-              Discount code{" "}
-              {cart.discount_code && `(${cart.discount_code.code})`}
+              Discount code
+              {cart.discount_code && ` (${cart.discount_code.code})`}
             </TableCell>
             <TableCell align="right" colSpan={2}>
-              {renderDiscountCode(cart)}
+              {isSingleCart ? renderAddDiscountCell : renderDiscountCode(cart)}
             </TableCell>
             <TableCell align="right">{renderDiscountAmount(cart)}</TableCell>
           </TableRow>

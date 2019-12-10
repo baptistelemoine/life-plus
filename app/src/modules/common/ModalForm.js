@@ -4,18 +4,22 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Box from "@material-ui/core/Box";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const ModalForm = props => {
   const {
     renderIcon,
+    renderButton,
     open,
     renderForm,
     title,
     text,
     isSubmitting,
-    onClose
+    onClose,
+    error
   } = props;
   const [isOpen, setIsOpen] = useState(open || false);
 
@@ -38,8 +42,8 @@ const ModalForm = props => {
   };
 
   useEffect(() => {
-    if (!isSubmitting && submitMyForm) setIsOpen(false);
-  }, [isSubmitting, submitMyForm]);
+    if (!isSubmitting && submitMyForm && !error) setIsOpen(false);
+  }, [isSubmitting, submitMyForm, error]);
 
   useEffect(() => {
     setIsOpen(open);
@@ -56,6 +60,7 @@ const ModalForm = props => {
         <DialogContent>
           <DialogContentText>{text}</DialogContentText>
           {renderForm(bindSubmitForm)}
+          {error && <Typography color="error">{error}</Typography>}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -70,16 +75,14 @@ const ModalForm = props => {
           </Button>
         </DialogActions>
       </Dialog>
-      {renderIcon && (
-        <IconButton
-          onClick={handleClick}
-          color="primary"
-          aria-label="upload picture"
-          component="span"
-        >
-          {renderIcon}
-        </IconButton>
-      )}
+      <Box onClick={handleClick} display="inline">
+        {renderIcon && (
+          <IconButton color="primary" component="span">
+            {renderIcon}
+          </IconButton>
+        )}
+        {renderButton}
+      </Box>
     </Fragment>
   );
 };

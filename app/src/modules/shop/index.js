@@ -49,7 +49,7 @@ const Shop = props => {
     // simulate saving cart for UX purpose
     setTimeout(() => {
       setIsSaving(false);
-    }, 1000);
+    }, 500);
   };
 
   return (

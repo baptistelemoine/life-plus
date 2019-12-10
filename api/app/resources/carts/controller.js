@@ -46,10 +46,17 @@ exports.create = async ctx => {
  * Update cart
  */
 exports.update = async ctx => {
-  const { Cart } = ctx.models;
+  const { Cart, Code } = ctx.models;
   const { body } = ctx.request;
   const cart = await Cart.findById(ctx.params.id);
-  const updatedCart = Object.assign(cart, body);
+  if (!cart) return ctx.boom(boom.notFound());
+  let code;
+  let updatedCart;
+  if (body.discount_code) {
+    code = await Code.findOne({ code: body.discount_code });
+    if (!code) return ctx.boom(boom.badRequest());
+    updatedCart = Object.assign(cart, { ...body, discount_code: code._id });
+  } else updatedCart = Object.assign(cart, body);
   await updatedCart.save();
   ctx.set('Location', `/api/cart/${cart._id}`);
   ctx.body = updatedCart;
