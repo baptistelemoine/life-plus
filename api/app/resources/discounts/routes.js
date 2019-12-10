@@ -28,6 +28,12 @@ module.exports = app => {
       controller: app.context.controllers.discounts.delete
     },
     {
+      method: 'PUT',
+      path: '/:id',
+      validation: app.context.validations.discounts.create,
+      controller: app.context.controllers.discounts.update
+    },
+    {
       method: 'POST',
       path: '/',
       validation: app.context.validations.discounts.create,

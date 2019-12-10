@@ -8,7 +8,7 @@ import ModalForm from "../../../common/ModalForm";
 import AddDiscountForm from "../forms/AddDiscountForm";
 import axios from "axios";
 import useSWR, { trigger } from "swr";
-import { PRODUCTS_API, DISCOUNTS_API } from "../../../common/constants";
+import { DISCOUNTS_API } from "../../../common/constants";
 
 const RowActionsButton = props => {
   const { id } = props;
@@ -17,12 +17,24 @@ const RowActionsButton = props => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { data: discounts } = useSWR(DISCOUNTS_API);
 
-  const initialValues = {};
+  const discountRef = discounts.find(({ _id }) => _id === id);
+  const initialValues = {
+    name: discountRef.name,
+    type: discountRef.type,
+    buy: discountRef.buy_pay ? discountRef.buy_pay[0] || "" : "",
+    pay: discountRef.buy_pay ? discountRef.buy_pay[1] || "" : "",
+    percent: discountRef.percent || ""
+  };
 
-  const handleSubmit = async product => {
+  const handleSubmit = async ({ name, type, buy, pay, percent }) => {
+    const discount = {
+      name,
+      type,
+      [type]: type === "buy_pay" ? [buy, pay] : percent
+    };
     setIsSubmitting(true);
-    await axios.put(`${PRODUCTS_API}/${id}`, product);
-    trigger(PRODUCTS_API);
+    await axios.put(`${DISCOUNTS_API}/${id}`, discount);
+    trigger(DISCOUNTS_API);
     setIsSubmitting(false);
     setIsModalOpened(false);
   };
@@ -42,9 +54,9 @@ const RowActionsButton = props => {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`${PRODUCTS_API}/${id}`);
+    await axios.delete(`${DISCOUNTS_API}/${id}`);
+    trigger(DISCOUNTS_API);
     setAnchorEl(null);
-    trigger(PRODUCTS_API);
   };
 
   return (
