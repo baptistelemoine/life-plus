@@ -22,8 +22,12 @@ export default function App() {
             </Route>
             <Route exact path="/admin">
               <AdminPage>
+                <Products />
+              </AdminPage>
+            </Route>
+            <Route exact path="/carts">
+              <AdminPage>
                 <Carts />
-                {/*<Products />*/}
               </AdminPage>
             </Route>
           </Switch>

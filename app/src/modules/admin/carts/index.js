@@ -6,6 +6,7 @@ import TableHeader from "../../common/TableHeader";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import DateFnsUtils from "@date-io/date-fns";
+import { guid } from "../../../helpers/utils";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -43,7 +44,7 @@ const Carts = props => {
       </Box>
       {data &&
         data.map((cart, index) => (
-          <Box mb={6}>
+          <Box mb={6} key={guid()}>
             <Typography variant="h6" color="textPrimary" gutterBottom>
               {`Cart #${index + 1}`}
             </Typography>
