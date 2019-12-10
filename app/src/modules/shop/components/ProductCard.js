@@ -1,12 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import AddToCartForm from "../forms/AddToCartForm";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -16,14 +14,6 @@ const useStyles = makeStyles(theme => ({
   },
   cardContent: {
     flexGrow: 1
-  },
-  cardActions: {
-    justifyContent: "space-between",
-    alignItems: "baseline",
-    padding: "20px"
-  },
-  quantity: {
-    maxWidth: "70px"
   },
   price: {
     marginTop: "20px",
@@ -64,7 +54,19 @@ const computeNewPrice = (price, discount) => {
 
 const ProductCard = props => {
   const classes = useStyles();
-  const { name, description, price, discount } = props;
+  const {
+    name,
+    description,
+    price,
+    discount,
+    id,
+    onAddToCart,
+    isSaving
+  } = props;
+
+  const handleSubmit = values => {
+    onAddToCart(id, values);
+  };
 
   return (
     <Card className={classes.card}>
@@ -82,23 +84,13 @@ const ProductCard = props => {
           </Typography>
         )}
       </CardContent>
-      <CardActions className={classes.cardActions}>
-        <TextField
-          className={classes.quantity}
-          id="quantity"
-          label="Quantity"
-          defaultValue={1}
-          type="number"
-          InputLabelProps={{
-            classes: {
-              root: classes.inputLabel
-            }
-          }}
-        />
-        <Button size="small" color="primary">
-          add to cart
-        </Button>
-      </CardActions>
+      {!isSaving ? (
+        <AddToCartForm onSubmit={handleSubmit} />
+      ) : (
+        <Box p={3}>
+          <Typography color="primary">Saving to cart...</Typography>
+        </Box>
+      )}
     </Card>
   );
 };

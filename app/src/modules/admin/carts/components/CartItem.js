@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import { guid } from "../../../../helpers/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -63,7 +64,7 @@ const CartItem = props => {
         </TableHead>
         <TableBody>
           {cart.products.map(row => (
-            <TableRow key={row.product.name}>
+            <TableRow key={guid()}>
               <TableCell>{row.product.name}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
               <TableCell align="right">{row.product.price}</TableCell>
@@ -80,7 +81,10 @@ const CartItem = props => {
             <TableCell align="right">{renderSubTotal(cart)}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Discount code</TableCell>
+            <TableCell>
+              Discount code{" "}
+              {cart.discount_code && `(${cart.discount_code.code})`}
+            </TableCell>
             <TableCell align="right" colSpan={2}>
               {renderDiscountCode(cart)}
             </TableCell>

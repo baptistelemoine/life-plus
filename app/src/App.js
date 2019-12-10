@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import MainLayout from "./modules/main";
 import AdminPage from "./modules/admin";
 import Products from "./modules/admin/products";
 import Carts from "./modules/admin/carts";
 import Shop from "./modules/shop";
+import Cart from "./modules/cart";
 import { SWRConfig } from "swr";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CartContext from "./modules/shop/context";
 
 export default function App() {
+  const [cart, setCart] = useState();
+
+  const handleCartUpdate = cart => {
+    setCart(cart);
+  };
+
   return (
     <SWRConfig
       value={{
@@ -15,23 +23,30 @@ export default function App() {
       }}
     >
       <Router>
-        <MainLayout>
-          <Switch>
-            <Route exact path="/">
-              <Shop />
-            </Route>
-            <Route exact path="/admin">
-              <AdminPage>
-                <Products />
-              </AdminPage>
-            </Route>
-            <Route exact path="/carts">
-              <AdminPage>
-                <Carts />
-              </AdminPage>
-            </Route>
-          </Switch>
-        </MainLayout>
+        <CartContext.Provider value={cart}>
+          <MainLayout>
+            <Switch>
+              <Route exact path="/">
+                <Shop onCartUpdate={handleCartUpdate} />
+              </Route>
+              <Route exact path="/admin">
+                <AdminPage>
+                  <Products />
+                </AdminPage>
+              </Route>
+              <Route exact path="/carts">
+                <AdminPage>
+                  <Carts />
+                </AdminPage>
+              </Route>
+              <Route exact path="/cart">
+                <AdminPage>
+                  <Cart />
+                </AdminPage>
+              </Route>
+            </Switch>
+          </MainLayout>
+        </CartContext.Provider>
       </Router>
     </SWRConfig>
   );

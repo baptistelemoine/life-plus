@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,6 +6,8 @@ import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import CartBadge from "./components/CartBadge";
+import CartContext from "../shop/context";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -23,6 +25,7 @@ const MainLayout = props => {
   const { children } = props;
   const classes = useStyles();
   const location = useLocation();
+  const cart = useContext(CartContext);
 
   const renderCta = () => {
     return routes
@@ -47,7 +50,18 @@ const MainLayout = props => {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar className={classes.toolbar}>
-          <nav>{renderCta()}</nav>
+          <nav>
+            <Link
+              component={RouterLink}
+              to="/cart"
+              variant="button"
+              color="inherit"
+              href="#"
+            >
+              <CartBadge items={cart ? cart.products.length : "0"} />
+            </Link>
+            {renderCta()}
+          </nav>
         </Toolbar>
       </AppBar>
       <main>{children}</main>
