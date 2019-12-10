@@ -8,7 +8,7 @@ import { CARTS_API } from "../../common/constants";
 import CartContext from "../../shop/context";
 
 const UpdateCodeButton = props => {
-  const cart = useContext(CartContext);
+  const { cart } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
@@ -37,12 +37,16 @@ const UpdateCodeButton = props => {
       error={error}
       onClose={handleClose}
       isSubmitting={isSubmitting}
-      renderButton={<Button color="primary">update code</Button>}
+      renderButton={
+        <Button color="primary">
+          {cart.discount_code ? "update code" : "add code"}
+        </Button>
+      }
       renderForm={bindSubmitForm => {
         return (
           <UpdateCodeForm
             initialValues={{
-              discount_code: ""
+              discount_code: cart.discount_code ? cart.discount_code.code : ""
             }}
             bindSubmitForm={bindSubmitForm}
             onSubmit={handleSubmit}

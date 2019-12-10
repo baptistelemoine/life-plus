@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MainLayout from "./modules/main";
 import AdminPage from "./modules/admin";
 import Products from "./modules/admin/products";
+import Discounts from "./modules/admin/discounts";
 import Carts from "./modules/admin/carts";
 import Shop from "./modules/shop";
 import Cart from "./modules/cart";
@@ -32,6 +33,7 @@ export default function App() {
               <Route exact path="/admin">
                 <AdminPage>
                   <Products />
+                  <Discounts />
                 </AdminPage>
               </Route>
               <Route exact path="/carts">

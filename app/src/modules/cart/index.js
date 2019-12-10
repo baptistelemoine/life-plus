@@ -20,7 +20,7 @@ const Cart = props => {
         <CartItem
           cart={data}
           isSingleCart
-          renderAddDiscountCell={<UpdateCodeButton />}
+          renderAddDiscountCell={<UpdateCodeButton cart={data} />}
         />
       ) : null}
     </Fragment>
