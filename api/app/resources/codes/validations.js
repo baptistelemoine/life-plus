@@ -43,8 +43,8 @@ exports.create = compose([
       code: joi
         .string()
         .uppercase()
-        .min(6)
-        .max(8)
+        // .min(6)
+        // .max(8)
         .required(),
       type: joi
         .string()

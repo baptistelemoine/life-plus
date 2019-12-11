@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import ModalForm from "../../../common/ModalForm";
-import AddProductForm from "../forms/AddProductForm";
+import AddCodeForm from "../forms/AddCodeForm";
 import AddIcon from "@material-ui/icons/Add";
 import useSWR, { trigger } from "swr";
 import axios from "axios";
-import { PRODUCTS_API, DISCOUNTS_API } from "../../../common/constants";
+import { CODES_API } from "../../../common/constants";
 import { renderErrors } from "../../../../helpers/utils";
 
 const AddButtonToolbar = props => {
-  const { data: discounts } = useSWR(DISCOUNTS_API);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleSubmit = async product => {
+  const handleSubmit = async ({ name, code, type, value }) => {
     setIsSubmitting(true);
     try {
-      await axios.post(PRODUCTS_API, product);
+      await axios.post(CODES_API, { name, code, type, value });
       setError(null);
-      trigger(PRODUCTS_API);
+      trigger(CODES_API);
     } catch (error) {
       setError(renderErrors(error.response.data));
     }
@@ -28,23 +27,22 @@ const AddButtonToolbar = props => {
 
   return (
     <ModalForm
-      title="Add product"
-      text="Please fill all required fields to create a new product"
+      title="Add discount code"
+      text="Please fill all required fields to create a new discount code"
       open={false}
+      isSubmitting={isSubmitting}
       error={error}
       onClose={handleClose}
-      isSubmitting={isSubmitting}
       renderIcon={<AddIcon />}
       renderForm={bindSubmitForm => {
         return (
-          <AddProductForm
+          <AddCodeForm
             initialValues={{
               name: "",
-              description: "",
-              price: "",
-              discount: ""
+              code: "",
+              type: "",
+              value: ""
             }}
-            discounts={discounts}
             bindSubmitForm={bindSubmitForm}
             onSubmit={handleSubmit}
           />

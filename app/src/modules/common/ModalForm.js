@@ -7,7 +7,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import Box from "@material-ui/core/Box";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 
 const ModalForm = props => {
   const {
@@ -60,7 +59,7 @@ const ModalForm = props => {
         <DialogContent>
           <DialogContentText>{text}</DialogContentText>
           {renderForm(bindSubmitForm)}
-          {error && <Typography color="error">{error}</Typography>}
+          {error && <Box mt={2}>{error}</Box>}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -28,6 +28,12 @@ module.exports = app => {
       controller: app.context.controllers.codes.delete
     },
     {
+      method: 'PUT',
+      path: '/:id',
+      validation: app.context.validations.codes.create,
+      controller: app.context.controllers.codes.update
+    },
+    {
       method: 'POST',
       path: '/',
       validation: app.context.validations.codes.create,

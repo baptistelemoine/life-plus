@@ -5,10 +5,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ModalForm from "../../../common/ModalForm";
-import AddDiscountForm from "../forms/AddDiscountForm";
+import AddCodeForm from "../forms/AddCodeForm";
 import axios from "axios";
 import useSWR, { trigger } from "swr";
-import { DISCOUNTS_API, PRODUCTS_API } from "../../../common/constants";
+import { CODES_API } from "../../../common/constants";
 import { renderErrors } from "../../../../helpers/utils";
 
 const RowActionsButton = props => {
@@ -17,27 +17,15 @@ const RowActionsButton = props => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(false);
-  const { data: discounts } = useSWR(DISCOUNTS_API);
+  const { data: codes } = useSWR(CODES_API);
 
-  const discountRef = discounts.find(({ _id }) => _id === id);
-  const initialValues = {
-    name: discountRef.name,
-    type: discountRef.type,
-    buy: discountRef.buy_pay ? discountRef.buy_pay[0] || "" : "",
-    pay: discountRef.buy_pay ? discountRef.buy_pay[1] || "" : "",
-    percent: discountRef.percent || ""
-  };
+  const initialValues = codes.find(({ _id }) => _id === id);
 
-  const handleSubmit = async ({ name, type, buy, pay, percent }) => {
-    const discount = {
-      name,
-      type,
-      [type]: type === "buy_pay" ? [buy, pay] : percent
-    };
+  const handleSubmit = async ({ name, code, type, value }) => {
     setIsSubmitting(true);
     try {
-      await axios.put(`${DISCOUNTS_API}/${id}`, discount);
-      trigger(DISCOUNTS_API);
+      await axios.put(`${CODES_API}/${id}`, { name, code, type, value });
+      trigger(CODES_API);
       setIsModalOpened(false);
       setError(null);
     } catch (error) {
@@ -62,9 +50,8 @@ const RowActionsButton = props => {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`${DISCOUNTS_API}/${id}`);
-    trigger(DISCOUNTS_API);
-    trigger(PRODUCTS_API);
+    await axios.delete(`${CODES_API}/${id}`);
+    trigger(CODES_API);
     setAnchorEl(null);
   };
 
@@ -86,15 +73,15 @@ const RowActionsButton = props => {
         </MenuItem>
       </Menu>
       <ModalForm
-        title="Update discount"
+        title="Update discount code"
         open={isModalOpened}
         onClose={handleClose}
         error={error}
-        text="Please fill all required fields to update discount"
+        text="Please fill all required fields to update discount code"
         isSubmitting={isSubmitting}
         renderForm={bindSubmitForm => {
           return (
-            <AddDiscountForm
+            <AddCodeForm
               initialValues={initialValues}
               bindSubmitForm={bindSubmitForm}
               onSubmit={handleSubmit}

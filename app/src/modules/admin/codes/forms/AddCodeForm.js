@@ -7,18 +7,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { guid } from "../../../../helpers/utils";
 
-const discountTypes = [
-  {
-    label: "Buy X pay Y",
-    value: "buy_pay"
-  },
-  {
-    label: "percent",
-    value: "percent"
-  }
-];
+const codeTypes = ["percent", "fixed"];
 
-const AddDiscountForm = props => {
+const AddCodeForm = props => {
   const { bindSubmitForm, onSubmit, initialValues } = props;
   return (
     <Formik
@@ -52,49 +43,33 @@ const AddDiscountForm = props => {
                   id: "type"
                 }}
               >
-                {discountTypes.map(({ label, value }) => (
-                  <MenuItem key={guid()} value={value}>
-                    {label}
+                {codeTypes.map(type => (
+                  <MenuItem key={guid()} value={type}>
+                    {type}
                   </MenuItem>
                 ))}
               </Field>
             </FormControl>
-            {values.type === "buy_pay" && (
-              <Box>
-                <Field
-                  type="number"
-                  name="buy"
-                  label="buy"
-                  required
-                  disabled={false}
-                  component={TextField}
-                  fullWidth
-                  margin="dense"
-                />
-                <Field
-                  type="number"
-                  name="pay"
-                  label="pay"
-                  required
-                  disabled={false}
-                  component={TextField}
-                  fullWidth
-                  margin="dense"
-                />
-              </Box>
-            )}
-            {values.type === "percent" && (
-              <Field
-                type="number"
-                name="percent"
-                label="percent"
-                required
-                disabled={false}
-                component={TextField}
-                fullWidth
-                margin="dense"
-              />
-            )}
+            <Field
+              type="text"
+              name="code"
+              label="code"
+              required
+              disabled={false}
+              component={TextField}
+              fullWidth
+              margin="dense"
+            />
+            <Field
+              type="text"
+              name="value"
+              label="value"
+              required
+              disabled={false}
+              component={TextField}
+              fullWidth
+              margin="dense"
+            />
           </Form>
         );
       }}
@@ -102,4 +77,4 @@ const AddDiscountForm = props => {
   );
 };
 
-export default AddDiscountForm;
+export default AddCodeForm;

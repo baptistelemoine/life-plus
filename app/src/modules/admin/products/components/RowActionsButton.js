@@ -9,12 +9,14 @@ import AddProductForm from "../forms/AddProductForm";
 import axios from "axios";
 import useSWR, { trigger } from "swr";
 import { PRODUCTS_API, DISCOUNTS_API } from "../../../common/constants";
+import { renderErrors } from "../../../../helpers/utils";
 
 const RowActionsButton = props => {
   const { id } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const { data: discounts } = useSWR(DISCOUNTS_API);
   const { data: products } = useSWR(PRODUCTS_API);
 
@@ -26,10 +28,15 @@ const RowActionsButton = props => {
 
   const handleSubmit = async product => {
     setIsSubmitting(true);
-    await axios.put(`${PRODUCTS_API}/${id}`, product);
-    trigger(PRODUCTS_API);
+    try {
+      await axios.put(`${PRODUCTS_API}/${id}`, product);
+      trigger(PRODUCTS_API);
+      setIsModalOpened(false);
+      setError(null);
+    } catch (error) {
+      setError(renderErrors(error.response.data));
+    }
     setIsSubmitting(false);
-    setIsModalOpened(false);
   };
 
   const handleClick = event => {
@@ -39,17 +46,12 @@ const RowActionsButton = props => {
   const handleClose = e => {
     setAnchorEl(null);
     setIsModalOpened(false);
+    setError(null);
   };
 
   const handleEdit = () => {
     setAnchorEl(null);
     setIsModalOpened(true);
-  };
-
-  const handleDelete = async () => {
-    await axios.delete(`${PRODUCTS_API}/${id}`);
-    setAnchorEl(null);
-    trigger(PRODUCTS_API);
   };
 
   return (
@@ -65,13 +67,11 @@ const RowActionsButton = props => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleEdit}>Edit</MenuItem>
-        <MenuItem onClick={handleDelete}>
-          <Typography color="error">Delete</Typography>
-        </MenuItem>
       </Menu>
       <ModalForm
         title="Update product"
         open={isModalOpened}
+        error={error}
         onClose={handleClose}
         text="Please fill all required fields to update product"
         isSubmitting={isSubmitting}

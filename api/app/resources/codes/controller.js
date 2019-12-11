@@ -45,3 +45,16 @@ exports.create = async ctx => {
   ctx.set('Location', `/api/codes/${code._id}`);
   ctx.body = code;
 };
+
+/**
+ * Update code
+ */
+exports.update = async ctx => {
+  const { Code } = ctx.models;
+  const { body } = ctx.request;
+  const code = await Code.findById(ctx.params.id);
+  const updatedCode = Object.assign(code, body);
+  await updatedCode.save();
+  ctx.set('Location', `/api/codes/${code._id}`);
+  ctx.body = updatedCode;
+};

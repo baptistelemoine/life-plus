@@ -24,6 +24,7 @@ const AddProductForm = props => {
               name="name"
               label="name"
               required
+              disabled={false}
               component={TextField}
               fullWidth
               margin="dense"
@@ -33,6 +34,7 @@ const AddProductForm = props => {
               name="description"
               label="description"
               required
+              disabled={false}
               component={TextField}
               fullWidth
               margin="dense"
@@ -42,6 +44,7 @@ const AddProductForm = props => {
               name="price"
               label="price"
               required
+              disabled={false}
               component={TextField}
               fullWidth
               margin="dense"
@@ -51,6 +54,7 @@ const AddProductForm = props => {
               <Field
                 name="discount"
                 label="discount"
+                disabled={false}
                 component={Select}
                 inputProps={{
                   id: "discount"

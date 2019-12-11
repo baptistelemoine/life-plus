@@ -3,6 +3,7 @@ import MainLayout from "./modules/main";
 import AdminPage from "./modules/admin";
 import Products from "./modules/admin/products";
 import Discounts from "./modules/admin/discounts";
+import Codes from "./modules/admin/codes";
 import Carts from "./modules/admin/carts";
 import Shop from "./modules/shop";
 import Cart from "./modules/cart";
@@ -34,6 +35,7 @@ export default function App() {
                 <AdminPage>
                   <Products />
                   <Discounts />
+                  <Codes />
                 </AdminPage>
               </Route>
               <Route exact path="/carts">

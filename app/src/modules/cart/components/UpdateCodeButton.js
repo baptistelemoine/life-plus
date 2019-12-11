@@ -20,7 +20,9 @@ const UpdateCodeButton = props => {
       trigger(`${CARTS_API}/${cart._id}`);
       setIsSubmitting(false);
     } catch (error) {
-      setError(`${value.discount_code} is not a valid code`);
+      setError(
+        `<Typography color="error" variant="caption">${value.discount_code} is not a valid code</Typography>`
+      );
       setIsSubmitting(false);
     }
   };
