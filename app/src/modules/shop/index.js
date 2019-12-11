@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import ProductCard from "./components/ProductCard";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -8,6 +8,7 @@ import { PRODUCTS_API, CARTS_API } from "../common/constants";
 import { guid } from "../../helpers/utils";
 import CartContext from "./context";
 import axios from "axios";
+import FirstVisit from "./components/FirstVisit";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -53,26 +54,29 @@ const Shop = props => {
   };
 
   return (
-    <Container className={classes.cardGrid} maxWidth="md">
-      <Grid container spacing={4}>
-        {data &&
-          data.map(({ name, description, price, discount, _id }) => {
-            return (
-              <Grid item xs={12} sm={6} md={4} key={guid()}>
-                <ProductCard
-                  name={name}
-                  description={description}
-                  price={price}
-                  discount={discount}
-                  id={_id}
-                  onAddToCart={handleAddToCart}
-                  isSaving={product === _id && isSaving}
-                />
-              </Grid>
-            );
-          })}
-      </Grid>
-    </Container>
+    <Fragment>
+      {data && !data.length && <FirstVisit />}
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {data &&
+            data.map(({ name, description, price, discount, _id }) => {
+              return (
+                <Grid item xs={12} sm={6} md={4} key={guid()}>
+                  <ProductCard
+                    name={name}
+                    description={description}
+                    price={price}
+                    discount={discount}
+                    id={_id}
+                    onAddToCart={handleAddToCart}
+                    isSaving={product === _id && isSaving}
+                  />
+                </Grid>
+              );
+            })}
+        </Grid>
+      </Container>
+    </Fragment>
   );
 };
 
