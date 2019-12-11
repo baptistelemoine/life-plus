@@ -1,14 +1,5 @@
 # LifePlus challenge Frontend
 
-## Get Started
-
-In case you want to run locally:
-
-```
-npm install
-npm start
-```
-
 ## Tech stack
 
 - React for UI rendering
