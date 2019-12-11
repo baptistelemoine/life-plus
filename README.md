@@ -17,6 +17,8 @@ I chose to stop the work one week after received the challenge which is i think 
 - you'll find some basics end-to-end tests in the frontent repository while i usually implement a lot in my projects
 - did not implement environments, it means e2 tests uses the same database, which is obviously not recommended!
 - no frontend build, app runs in dev mode
+- no loading states as we run locally but should be implemented to be production ready
+- deep frontend routing to directly edit stuff in admin area (ie: /admin/products/{id}/edit)
 
 ## Notes
 
