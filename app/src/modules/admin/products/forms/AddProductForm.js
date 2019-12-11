@@ -23,6 +23,7 @@ const AddProductForm = props => {
               type="text"
               name="name"
               label="name"
+              data-test="add-product-name"
               required
               disabled={false}
               component={TextField}
@@ -33,6 +34,7 @@ const AddProductForm = props => {
               type="text"
               name="description"
               label="description"
+              data-test="add-product-desc"
               required
               disabled={false}
               component={TextField}
@@ -43,6 +45,7 @@ const AddProductForm = props => {
               type="number"
               name="price"
               label="price"
+              data-test="add-product-price"
               required
               disabled={false}
               component={TextField}
@@ -54,6 +57,7 @@ const AddProductForm = props => {
               <Field
                 name="discount"
                 label="discount"
+                data-test="add-product-discount"
                 disabled={false}
                 component={Select}
                 inputProps={{

@@ -74,7 +74,7 @@ const ModalForm = props => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Box onClick={handleClick} display="inline">
+      <Box onClick={handleClick} display="inline" data-test="modal-form-submit">
         {renderIcon && (
           <IconButton color="primary" component="span">
             {renderIcon}

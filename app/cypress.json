@@ -1,0 +1,14 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "reporterOptions": {
+    "reportDir": "cypress/results",
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "toConsole": true
+  },
+  "video": false,
+  "screenshotsFolder": "cypress/results/screenshots",
+  "viewportWidth": 1440,
+  "viewportHeight": 900
+}

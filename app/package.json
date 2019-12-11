@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "npx cypress open",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -38,5 +38,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^5.0.2",
+    "cypress": "^3.7.0",
+    "cypress-testing-library": "^4.0.0"
   }
 }

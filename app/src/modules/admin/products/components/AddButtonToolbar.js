@@ -34,7 +34,7 @@ const AddButtonToolbar = props => {
       error={error}
       onClose={handleClose}
       isSubmitting={isSubmitting}
-      renderIcon={<AddIcon />}
+      renderIcon={<AddIcon data-test="admin-products-add-btn" />}
       renderForm={bindSubmitForm => {
         return (
           <AddProductForm

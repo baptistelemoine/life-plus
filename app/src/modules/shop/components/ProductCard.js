@@ -69,7 +69,7 @@ const ProductCard = props => {
   };
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} data-test="shop-product-card">
       <CardContent className={classes.cardContent}>
         <Typography gutterBottom variant="h5" component="h2">
           {name}
