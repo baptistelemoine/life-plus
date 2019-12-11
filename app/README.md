@@ -13,5 +13,6 @@ Run end-to-end tests using the great cypress tool.
 Note: it covers really basics example here and we definitely should do really more in a realworld production application
 
 ```
+npm install
 npm test
 ```
