@@ -1,10 +1,10 @@
-FROM node:8.12.0
+FROM node:8.12
 
-COPY package.json package-lock.json /app/
+COPY package.json /app/
 WORKDIR /app
-RUN yarn install
+RUN npm install
 COPY . /app/
 
-EXPOSE 8083
+EXPOSE 9000
 
-CMD ["node", "index.js"]
+CMD ["npm", "start"]

@@ -2,7 +2,7 @@
   "port": "9000",
   "logLevel": "debug",
   "mongodb": {
-    "url": "mongodb://localhost/lpio2",
+    "url": "mongodb://mongo/lpio",
     "options": {}
   }
 }
