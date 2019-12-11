@@ -7,6 +7,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import DateFnsUtils from "@date-io/date-fns";
 import startOfDay from "date-fns/startOfDay";
+import endOfDay from "date-fns/endOfDay";
 import { guid } from "../../../helpers/utils";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 
@@ -14,17 +15,17 @@ const Carts = props => {
   const [selectedFromDate, setSelectedFromDate] = useState(
     startOfDay(new Date())
   );
-  const [selectedToDate, setSelectedToDate] = useState(startOfDay(new Date()));
+  const [selectedToDate, setSelectedToDate] = useState(endOfDay(new Date()));
   const { data } = useSWR(
     `${CARTS_API}?from=${selectedFromDate.getTime()}&to=${selectedToDate.getTime()}`
   );
 
   const handleFromDateChange = date => {
-    setSelectedFromDate(date);
+    setSelectedFromDate(startOfDay(date));
   };
 
   const handleToDateChange = date => {
-    setSelectedToDate(date);
+    setSelectedToDate(endOfDay(date));
   };
 
   return (
