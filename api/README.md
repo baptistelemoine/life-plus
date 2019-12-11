@@ -2,7 +2,10 @@
 
 ## Get Started
 
+In case you want to run locally:
+
 ```
+npm install
 npm start
 ```
 

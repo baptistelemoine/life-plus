@@ -1,21 +1,26 @@
-# Create React App example
+# Life plus challenge Frontend
 
-## How to use
+## Get Started
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
+In case you want to run locally:
 
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/create-react-app
-cd create-react-app
 ```
-
-Install it and run:
-
-```sh
 npm install
 npm start
 ```
 
-## The idea behind the example
+## Tech stack
 
-This example demonstrates how you can use [Create React App](https://github.com/facebookincubator/create-react-app).
+- React for UI rendering
+- material-ui for components library
+- Redux not used here for app state management, instead tried and really impressed by SWR [read more](https://swr.now.sh/) and react context api
+
+## Tests
+
+Run end-to-end tests using the great cypress tool.
+
+Note: it covers really basics example here and we definitely should do really more in a realworld production application
+
+```
+npm test
+```
