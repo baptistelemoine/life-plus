@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalForm from "../../../common/ModalForm";
 import AddDiscountForm from "../forms/AddDiscountForm";
 import AddIcon from "@material-ui/icons/Add";
-import useSWR, { trigger } from "swr";
+import { trigger } from "swr";
 import axios from "axios";
 import { DISCOUNTS_API } from "../../../common/constants";
 import { renderErrors } from "../../../../helpers/utils";

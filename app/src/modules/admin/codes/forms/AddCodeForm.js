@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { TextField, Select } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
 import MenuItem from "@material-ui/core/MenuItem";
-import Box from "@material-ui/core/Box";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { guid } from "../../../../helpers/utils";

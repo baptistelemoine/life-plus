@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import MUIDataTable from "mui-datatables";
 import TableHeader from "../../common/TableHeader";
 import useSWR from "swr";

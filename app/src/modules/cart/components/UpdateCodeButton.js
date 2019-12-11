@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import ModalForm from "../../common/ModalForm";
 import UpdateCodeForm from "../forms/UpdateCodeForm";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { trigger } from "swr";
 import axios from "axios";
 import { CARTS_API } from "../../common/constants";
-import CartContext from "../../shop/context";
 
 const UpdateCodeButton = props => {
   const { cart } = props;
@@ -21,7 +21,9 @@ const UpdateCodeButton = props => {
       setIsSubmitting(false);
     } catch (error) {
       setError(
-        `<Typography color="error" variant="caption">${value.discount_code} is not a valid code</Typography>`
+        <Typography color="error" variant="caption">
+          {value.discount_code} is not a valid code
+        </Typography>
       );
       setIsSubmitting(false);
     }

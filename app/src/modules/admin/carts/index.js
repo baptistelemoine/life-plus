@@ -1,20 +1,14 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import CartItem from "./components/CartItem";
-import useSWR, { trigger } from "swr";
+import useSWR from "swr";
 import { CARTS_API } from "../../common/constants";
 import TableHeader from "../../common/TableHeader";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import DateFnsUtils from "@date-io/date-fns";
 import startOfDay from "date-fns/startOfDay";
 import { guid } from "../../../helpers/utils";
-import addDays from "date-fns/addDays";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-  DatePicker
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 
 const Carts = props => {
   const [selectedFromDate, setSelectedFromDate] = useState(

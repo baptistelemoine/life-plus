@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ModalForm from "../../../common/ModalForm";
 import AddProductForm from "../forms/AddProductForm";
@@ -24,7 +23,7 @@ const RowActionsButton = props => {
   let initialValues;
   if (productRef.discount) {
     initialValues = { ...productRef, discount: productRef.discount._id };
-  } else initialValues = productRef;
+  } else initialValues = { ...productRef, discount: "" };
 
   const handleSubmit = async product => {
     setIsSubmitting(true);
