@@ -1,4 +1,4 @@
-# Life plus challenge Frontend
+# LifePlus challenge Frontend
 
 ## Get Started
 
