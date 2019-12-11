@@ -1,43 +1,65 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import CartItem from "./components/CartItem";
-import useSWR from "swr";
+import useSWR, { trigger } from "swr";
 import { CARTS_API } from "../../common/constants";
 import TableHeader from "../../common/TableHeader";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import DateFnsUtils from "@date-io/date-fns";
+import startOfDay from "date-fns/startOfDay";
 import { guid } from "../../../helpers/utils";
+import addDays from "date-fns/addDays";
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
+  DatePicker
 } from "@material-ui/pickers";
 
 const Carts = props => {
-  const { data } = useSWR(CARTS_API);
+  const [selectedFromDate, setSelectedFromDate] = useState(
+    startOfDay(new Date())
+  );
+  const [selectedToDate, setSelectedToDate] = useState(startOfDay(new Date()));
+  const { data } = useSWR(
+    `${CARTS_API}?from=${selectedFromDate.getTime()}&to=${selectedToDate.getTime()}`
+  );
+
+  const handleFromDateChange = date => {
+    setSelectedFromDate(date);
+  };
+
+  const handleToDateChange = date => {
+    setSelectedToDate(date);
+  };
+
   return (
     <Fragment>
       <TableHeader
         title="Carts"
         text="Display all carts using date range below"
       />
-      <Box mb={5}>
+      <Box mb={5} display="flex" alignItems="flex-end">
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
+          <DatePicker
             disableToolbar
             variant="inline"
-            format="MM/dd/yyyy"
+            format="yyyy/MM/dd"
+            value={selectedFromDate}
+            autoOk
             label="Start date"
-            // value={selectedDate}
-            // onChange={handleDateChange}
+            onChange={handleFromDateChange}
           />
           <Box ml={5} display="inline">
-            <KeyboardDatePicker
+            <DatePicker
               disableToolbar
               variant="inline"
+              value={selectedToDate}
+              minDate={selectedFromDate}
               label="End date"
-              format="MM/dd/yyyy"
-              // value={selectedDate}
-              // onChange={handleDateChange}
+              autoOk
+              format="yyyy/MM/dd"
+              onChange={handleToDateChange}
             />
           </Box>
         </MuiPickersUtilsProvider>

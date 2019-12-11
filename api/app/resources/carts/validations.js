@@ -21,6 +21,19 @@ exports.getOne = compose([
 ]);
 
 /**
+ * Get one all validation
+ * Make sure url query params are valif timestamp
+ */
+exports.getAll = compose([
+  joiValidate({
+    query: joi.object().keys({
+      from: joi.date().timestamp(),
+      to: joi.date().timestamp()
+    })
+  })
+]);
+
+/**
  * Create cart validation
  */
 exports.create = compose([

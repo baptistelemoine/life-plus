@@ -8,7 +8,19 @@ const boom = require('boom');
  */
 exports.getAll = async ctx => {
   const { Cart, Discount } = ctx.models;
-  const carts = await Cart.find()
+  const { from, to } = ctx.query;
+  const fromDate = new Date(Number(from));
+  const toDate = new Date(Number(to));
+  let filters = {};
+  if (toDate > fromDate) {
+    filters = {
+      createdAt: {
+        $gte: new Date(Number(fromDate)),
+        $lte: new Date(Number(toDate))
+      }
+    };
+  }
+  const carts = await Cart.find(filters)
     .populate('discount_code')
     .populate({ path: 'products.product', populate: { path: 'discount', model: Discount } })
     .exec();
