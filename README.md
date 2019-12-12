@@ -14,9 +14,9 @@ You can use the frontend app to manage all endpoints available in the api for ea
 I chose to stop the work one week after received the challenge which is i think acceptable for a home work. Here is a list of limit or things i wanted to implement before submitting but not done due to lack of time:
 
 - there is no test on API, and we definitely should implement it, i usually use mocha / chai for this purpose
+- as i want to deliver fast and don't feel comfortable enough with typescript, everything is written in vanilla js, but i really want to go deeper with ts
 - you'll find some basics end-to-end tests in the frontent repository while i usually implement a lot in my projects
 - did not implement environments, it means e2 tests uses the same database, which is obviously not recommended!
-- no frontend build, app runs in dev mode
 - no loading states as we run locally but should be implemented to be production ready
 - deep frontend routing to directly edit stuff in admin area (ie: /admin/products/{id}/edit)
 - note about cart: as we don't have user implementation and we don't store any reference in the client browser, cart is working per session, that means you'll lose it by opening a new browser tab or refreshing your browser
