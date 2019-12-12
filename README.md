@@ -19,6 +19,7 @@ I chose to stop the work one week after received the challenge which is i think 
 - no frontend build, app runs in dev mode
 - no loading states as we run locally but should be implemented to be production ready
 - deep frontend routing to directly edit stuff in admin area (ie: /admin/products/{id}/edit)
+- note about cart: as we don't have user implementation and we don't store any reference in the client browser, cart is working per session, that means you'll lose it by opening a new browser tab or refreshing your browser
 
 ## Notes
 
