@@ -52,7 +52,7 @@ exports.create = compose([
         .required(),
       value: joi
         .number()
-        .integer()
+        .positive()
         .required()
     })
   })

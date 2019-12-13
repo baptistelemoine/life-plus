@@ -37,9 +37,15 @@ exports.update = compose([
 exports.create = compose([
   joiValidate({
     body: joi.object().keys({
-      name: joi.string().required(),
+      name: joi
+        .string()
+        .max(50)
+        .required(),
       description: joi.string().required(),
-      price: joi.number().required(),
+      price: joi
+        .number()
+        .positive()
+        .required(),
       discount: joi.objectId().allow(null)
     })
   })
@@ -51,9 +57,9 @@ exports.create = compose([
 exports.update = compose([
   joiValidate({
     body: joi.object().keys({
-      name: joi.string(),
+      name: joi.string().max(50),
       description: joi.string(),
-      price: joi.number(),
+      price: joi.number().positive(),
       discount: joi.objectId().allow(null)
     })
   })

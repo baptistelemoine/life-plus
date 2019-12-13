@@ -45,7 +45,7 @@ export default function App() {
               </Route>
               <Route exact path="/cart">
                 <AdminPage>
-                  <Cart />
+                  <Cart onCartValidate={handleCartUpdate} />
                 </AdminPage>
               </Route>
             </Switch>

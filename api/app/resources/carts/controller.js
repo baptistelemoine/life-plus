@@ -2,12 +2,13 @@
  * Module dependencies
  */
 const boom = require('boom');
+const _ = require('lodash');
 
 /**
  * Get all carts
  */
 exports.getAll = async ctx => {
-  const { Cart, Discount } = ctx.models;
+  const { Cart } = ctx.models;
   const { from, to } = ctx.query;
   const fromDate = new Date(Number(from));
   const toDate = new Date(Number(to));
@@ -20,10 +21,7 @@ exports.getAll = async ctx => {
       }
     };
   }
-  const carts = await Cart.find(filters)
-    .populate('discount_code')
-    .populate({ path: 'products.product', populate: { path: 'discount', model: Discount } })
-    .exec();
+  const carts = await Cart.discriminators.ValidatedCart.find(filters);
   ctx.body = carts;
 };
 
@@ -33,11 +31,11 @@ exports.getAll = async ctx => {
 exports.getOne = async ctx => {
   const { Cart, Discount } = ctx.models;
   const cart = await Cart.findById(ctx.params.id);
+  if (!cart) return ctx.boom(boom.notFound());
   await cart
     .populate('discount_code')
     .populate({ path: 'products.product', populate: { path: 'discount', model: Discount } })
     .execPopulate();
-  if (!cart) return ctx.boom(boom.notFound());
   ctx.body = cart;
 };
 
@@ -62,6 +60,7 @@ exports.update = async ctx => {
   const { body } = ctx.request;
   const cart = await Cart.findById(ctx.params.id);
   if (!cart) return ctx.boom(boom.notFound());
+  if (cart.type) return ctx.boom(boom.badRequest('cannot update a validated cart'));
   let code;
   let updatedCart;
   if (body.discount_code) {
@@ -72,4 +71,21 @@ exports.update = async ctx => {
   await updatedCart.save();
   ctx.set('Location', `/api/cart/${cart._id}`);
   ctx.body = updatedCart;
+};
+
+/**
+ * Validate cart
+ */
+exports.validate = async ctx => {
+  const { Cart, Discount } = ctx.models;
+  const cart = await Cart.findById(ctx.params.id);
+  if (!cart) return ctx.boom(boom.notFound());
+  const originalCart = await cart
+    .populate('discount_code')
+    .populate({ path: 'products.product', populate: { path: 'discount', model: Discount } })
+    .execPopulate();
+  const validatedCart = await new Cart.discriminators.ValidatedCart(
+    _.omit(originalCart.toObject(), '_id')
+  ).save();
+  ctx.body = validatedCart;
 };

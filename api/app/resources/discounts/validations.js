@@ -45,7 +45,7 @@ exports.create = compose([
         .required(),
       percent: joi
         .number()
-        .integer()
+        .positive()
         .when('type', {
           is: constants.DISCOUNT_TYPES[1],
           then: joi.required()
@@ -53,7 +53,7 @@ exports.create = compose([
       buy_pay: joi
         .array()
         .length(2)
-        .items(joi.number().integer())
+        .items(joi.number().positive())
         .unique((a, b) => a < b)
         .when('type', {
           is: constants.DISCOUNT_TYPES[0],

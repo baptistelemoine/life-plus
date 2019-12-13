@@ -28,7 +28,8 @@ exports.getAll = compose([
   joiValidate({
     query: joi.object().keys({
       from: joi.date().timestamp(),
-      to: joi.date().timestamp()
+      to: joi.date().timestamp(),
+      type: joi.string().only('validated')
     })
   })
 ]);
@@ -42,7 +43,10 @@ exports.create = compose([
       products: joi.array().items(
         joi.object().keys({
           product: joi.objectId(),
-          quantity: joi.number().integer()
+          quantity: joi
+            .number()
+            .integer()
+            .positive()
         })
       ),
       discount_code: joi.string().allow(null)
@@ -59,7 +63,10 @@ exports.update = compose([
       products: joi.array().items(
         joi.object().keys({
           product: joi.objectId(),
-          quantity: joi.number().integer()
+          quantity: joi
+            .number()
+            .integer()
+            .positive()
         })
       ),
       discount_code: joi.string().allow(null)

@@ -28,6 +28,11 @@ module.exports = app => {
       controller: app.context.controllers.carts.create
     },
     {
+      method: 'POST',
+      path: '/:id/validate',
+      controller: app.context.controllers.carts.validate
+    },
+    {
       method: 'PUT',
       path: '/:id',
       validation: app.context.validations.carts.update,

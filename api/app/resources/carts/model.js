@@ -54,7 +54,8 @@ const cartSchema = new Schema(
   {
     timestamps: true,
     toObject: { virtuals: true },
-    toJSON: { virtuals: true }
+    toJSON: { virtuals: true },
+    discriminatorKey: 'type'
   }
 );
 cartSchema.plugin(mongooseHidden);
@@ -81,4 +82,13 @@ cartSchema.virtual('total').get(function() {
 /**
  * Create model from Schema and db
  */
-module.exports = exports = db => db.model('Cart', cartSchema);
+module.exports = exports = db => {
+  const Cart = db.model('Cart', cartSchema);
+  Cart.discriminator(
+    'ValidatedCart',
+    new Schema({
+      products: { type: Schema.Types.Mixed }
+    })
+  );
+  return Cart;
+};
