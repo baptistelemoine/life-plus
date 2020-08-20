@@ -14,7 +14,7 @@
     "@sigfox/koa-boom": "^1.0.1",
     "@sigfox/koa-error-handler": "^1.0.1",
     "@sigfox/koa-joi-validate": "^1.0.1",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^5.0.0",
     "boom": "^4.2.0",
     "chance": "^1.0.6",
     "figc": "0.0.3",
