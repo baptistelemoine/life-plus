@@ -33,7 +33,7 @@
     "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.2.tgz",
     "mjml": "^3.3.0",
     "moment": "https://registry.npmjs.org/moment/-/moment-2.18.1.tgz",
-    "mongoose": "^4.6.8",
+    "mongoose": "^4.13.21",
     "mongoose-hidden": "^1.2.0",
     "mongoose-schema-jsonschema": "^1.1.13",
     "request": "https://registry.npmjs.org/request/-/request-2.81.0.tgz",
@@ -49,7 +49,7 @@
     "eslint-config-sigfox": "^0.2.3",
     "eslint-plugin-import": "^2.14.0",
     "eslint-restricted-globals": "^0.1.1",
-    "mocha": "^3.2.0",
+    "mocha": "^10.2.0",
     "nodemon": "^1.18.4",
     "nyc": "^11.4.1"
   },
